@@ -1,0 +1,12 @@
+{
+  "name": "visor-3d-obj",
+  "version": "1.0.0",
+  "description": "Visor 3D simple para cargar y rotar archivos OBJ en TV",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 3000 -c-1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

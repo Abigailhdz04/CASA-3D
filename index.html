@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visor 3D de Objetos para TV</title>
+  <link rel="stylesheet" href="./style.css">
+  
+  <!-- Import maps polyfill for older browsers (optional but good practice) -->
+  <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+
+  <!-- Import map to load Three.js dependencies easily via CDN -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- WebGL 3D Canvas Container -->
+  <div id="canvas-container"></div>
+
+  <!-- Loading Screen Overlay (Translucent Blur) -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="spinner"></div>
+    <div class="loading-text" id="loading-status">Inicializando escena 3D...</div>
+    <div class="loading-progress" id="progress-text">0%</div>
+  </div>
+
+  <!-- Float Panel for Controls -->
+  <div id="ui-panel" class="ui-panel">
+    <div class="panel-header">
+      <h1>Visor 3D de Objetos</h1>
+      <p>Diseño premium optimizado para TV</p>
+    </div>
+
+    <!-- Upload Section -->
+    <div class="control-group">
+      <label>Archivo 3D</label>
+      <label class="file-upload-btn">
+        <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+        </svg>
+        <span>Subir archivo .OBJ</span>
+        <input type="file" id="file-input" accept=".obj">
+      </label>
+      <button class="btn-secondary" id="load-default-btn">Recargar Predeterminado</button>
+    </div>
+
+    <!-- Auto Rotation Switch -->
+    <div class="control-group switch-container">
+      <label style="margin-bottom: 0;">Rotación Automática</label>
+      <label class="switch">
+        <input type="checkbox" id="auto-rotate" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- Speed Slider -->
+    <div class="control-group">
+      <label>Velocidad de Rotación</label>
+      <input type="range" id="rotation-speed" min="0.001" max="0.03" step="0.001" value="0.005">
+    </div>
+
+    <!-- Material Dropdown Selector -->
+    <div class="control-group">
+      <label>Estilo Visual</label>
+      <div class="select-style">
+        <select id="material-select">
+          <option value="clay">Arcilla Mate (Default)</option>
+          <option value="gold">Oro Pulido</option>
+          <option value="glass">Vidrio Translúcido</option>
+          <option value="wireframe">Estructura Azul (Wireframe)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Left Hide Panel Button -->
+  <button class="hide-panel-btn" id="hide-panel-btn">Ocultar Panel</button>
+
+  <!-- Bottom Right Fullscreen Toggle Button -->
+  <button class="fullscreen-btn" id="fullscreen-btn" title="Pantalla Completa">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+    </svg>
+  </button>
+
+  <!-- Toast messages container -->
+  <div id="toast" class="toast">Notificación</div>
+
+  <!-- Application Logic -->
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
